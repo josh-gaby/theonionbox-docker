@@ -1,0 +1,15 @@
+#!/bin/bash
+set -o errexit
+
+echo -e "\n========================================================"
+# Display OS version, Tor version & torrc in log
+echo -e "Debian Version: \c" && cat /etc/debian_version
+python3.6 --version
+cat ${config_file}
+echo -e "========================================================\n"
+
+if [ ${cc_enabled} == true ]; then
+  /usr/local/bin/theonionbox -c ${config_file} --controlcenter /theonionbox-config/cc.cfg
+else
+  /usr/local/bin/theonionbox -c ${config_file}
+fi
